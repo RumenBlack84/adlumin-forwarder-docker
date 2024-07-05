@@ -128,6 +128,3 @@ EXPOSE 40001/udp
 EXPOSE 40002/udp
 # Office365
 EXPOSE 45000/udp
-
-# dont think I need any volumes since we dont really care about any user data beyond tenantid which I can pass in a variable
-#VOLUME /usr/local/adlumin
