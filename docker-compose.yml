@@ -2,6 +2,9 @@ services:
   adlumin-forwarder:
     image: ghcr.io/rumenblack84/adlumin-forwarder-docker:latest
     environment:
+      - PUID=1000 # set it so files created in the bind mount will be uid 1000 (change as required)
+      - PGID=1000 # set it so files created in the bind mount will be gid 1000 (change as required)
+      - UMASK=000 # set umask 000 will cause all files to have 777 perms
       - TENANT_ID=
       - SOPHOS_API=
       - OFFICE365_TOKEN=

@@ -16,10 +16,6 @@ RUN \
   mkdir -p /usr/local/adlumin && \
   chsh -s /bin/bash root
 
-# Copy the local repository into the image
-COPY adlumin310edit.sh /usr/local/bin/adlumin310edit.sh
-RUN chmod +x /usr/local/bin/adlumin310edit.sh
-
 # Copy the startup script
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh

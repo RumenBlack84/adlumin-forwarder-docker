@@ -26,6 +26,9 @@ I recommend keeping unedited copies of these files handy as backups. In my examp
 <span style="color: green;">Correct: Tenant_ID=123</span>
 
 ### Variables
+- PUID - set it so files created in the bind mount will be uid 1000 (change as required)
+- PGID - set it so files created in the bind mount will be gid 1000 (change as required)
+- UMASK - set umask 000 will cause all files to have 777 perms
 - TENANT_ID - This variable is <b>MANDATORY</b> we need it in order to send the logs to the right tenant. Without it the docker will shutdown shortly after starting it as the script will fail.
 - SOPHOS_API - This variable is optional, its part of the sophos integration if you need to use it ensure you are putting the API Access URL + Headers block from the integrations instruction as this variable.
 - OFFICE365_TOKEN - I'm not even sure this variable is used anymore as the azure integration now covers everything in Azure including Office365, I've included it since it is mentioned in the /usr/local/adlumin/adlumin_config.txt file.
@@ -37,6 +40,9 @@ services:
   adlumin-forwarder:
     image: ghcr.io/rumenblack84/adlumin-forwarder-docker:latest
     environment:
+      - PUID=1000 # set it so files created in the bind mount will be uid 1000 (change as required)
+      - PGID=1000 # set it so files created in the bind mount will be gid 1000 (change as required)
+      - UMASK=000 # set umask 000 will cause all files to have 777 perms
       - TENANT_ID=
       - SOPHOS_API=
       - OFFICE365_TOKEN=
