@@ -148,8 +148,10 @@ This docker run example is just for running a single instance of the forwarder o
 
 <span style="color: green;">Correct: Tenant_ID=123</span>
 ```sh
-docker run -d \
+docker run --restart=unless-stopped -d \
   --name adlumin-forwarder \  # Name the container
+  -e user=1000:1000 \ #Match to the UID & GID of the user you want to run the docker as. It's important they have permission to access the files where we have our bind mount located. This will also avoid running the container process itself as root which is good for security.
+  -e UMASK=022 \ # set umask 022 will cause all files to have 755 perms
   -e TENANT_ID= \  #Set environment variable TENANT_ID
   -e SOPHOS_API= \  # Set environment variable SOPHOS_API
   -e OFFICE365_TOKEN= \  # Set environment variable OFFICE365_TOKEN
