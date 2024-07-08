@@ -1,6 +1,10 @@
 # Adlumin-Forwarder-Docker
 A repo for the build files needed to create an adlumin log forwarders docker. Please note this is repo does not contain any of adlumins code to avoid any potential copyright issues. You must obtain it from your own log forwarder VM and provide it in a bind mount.
 
+Container created July 8th 2024 was scanned with <a href="https://github.com/aquasecurity/trivy">trivy version 0.53.0</a> showed no known vulnerabilities.
+
+Total: 0 (UNKNOWN: 0, LOW: 0, MEDIUM: 0, HIGH: 0, CRITICAL: 0)
+
 # How to use this docker
 
 ## How to get the required tenant ID
