@@ -21,9 +21,9 @@ I recommend keeping unedited copies of these files handy as backups. In my examp
 
 ### All variables should not have quotes. Using quotes will cause failures within the docker.
 
-<span style="color: red;">Wrong: Tenant_ID="123"</span>
+😦 <span style="color: red;">Wrong: Tenant_ID="123"</span>
 
-<span style="color: green;">Correct: Tenant_ID=123</span>
+😄 <span style="color: green;">Correct: Tenant_ID=123</span>
 
 ### Variables
 - user - Match to the UID & GID of the user you want to run the docker container process as. It's important they have permission to access the files where we have our bind mount located. This will also avoid running the container process itself as root which is good for security. If ensure of your uid:gid of the required user on your docker host run "username=$(whoami) && id $username" while logged in as that user. Final value should look like uid:gid "user=1000:1000" in your docker compose.

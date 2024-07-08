@@ -17,20 +17,6 @@ EOF
 echo "**** Configuring /usr/local/adlumin/sophos_config.txt with api token if provided ****"
 echo "${SOPHOS_API}" > /usr/local/adlumin/sophos_config.txt
 
-# Debugging: Check if the script exists and has execute permissions
-if [ -f /usr/local/bin/adlumin310edit.sh ]; then
-    echo "adlumin310edit.sh exists"
-else
-    echo "adlumin310edit.sh does not exist"
-fi
-
-if [ -x /usr/local/bin/adlumin310edit.sh ]; then
-    echo "adlumin310edit.sh is executable"
-else
-    echo "adlumin310edit.sh is not executable"
-fi
-
-
 # Check if the variable RUN_EDIT_SCRIPT is set to "yes" (case-insensitive)
 if [ "$(echo "${RUN_EDIT_SCRIPT}" | tr '[:upper:]' '[:lower:]')" = "yes" ]; then
     echo "###########################################################################################"
