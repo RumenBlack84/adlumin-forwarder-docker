@@ -2,9 +2,8 @@ services:
   adlumin-forwarder:
     image: ghcr.io/rumenblack84/adlumin-forwarder-docker:latest
     environment:
-      - PUID=1000 # set it so files created in the bind mount will be uid 1000 (change as required)
-      - PGID=1000 # set it so files created in the bind mount will be gid 1000 (change as required)
-      - UMASK=000 # set umask 000 will cause all files to have 777 perms
+      - user=1000:1000 #Match to the UID & GID of the user you want to run the docker as. It's important they have permission to access the files where we have our bind mount located. This will also avoid running the container process itself as root which is good for security.
+      - UMASK=022 # set umask 022 will cause all files to have 755 perms
       - TENANT_ID=
       - SOPHOS_API=
       - OFFICE365_TOKEN=

@@ -78,6 +78,6 @@ if [ "$(echo "${RUN_EDIT_SCRIPT}" | tr '[:upper:]' '[:lower:]')" = "yes" ]; then
 fi
 
 # Start the Python script for the log forwarder in the background
-exec python /usr/local/adlumin/adlumin_forwarder.py
+exec su-exec adlumin "$@"
 # If script doesn't launch cat the log file
 cat /usr/local/adlumin/adlumin_forwarder.log

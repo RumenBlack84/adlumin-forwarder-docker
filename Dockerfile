@@ -9,10 +9,12 @@ RUN \
     build-base \
     zstd-dev \
     bash \
+    su-exec \
     shadow && \
   echo "**** Installing required python dependencies ****" && \
   python -m pip install --upgrade pip && \
   pip install requests urllib3 zstandard boto3 && \
+  useradd -ms /bin/bash adlumin && \
   mkdir -p /usr/local/adlumin && \
   chsh -s /bin/bash root
 
@@ -27,7 +29,7 @@ VOLUME /usr/local/adlumin
 WORKDIR /usr/local/adlumin
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-
+CMD ["python", "/usr/local/adlumin/adlumin_forwarder.py"]
 # ports and volumes
 # TCP Ports
 # Network Security Devices

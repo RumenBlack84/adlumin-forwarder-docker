@@ -26,9 +26,8 @@ I recommend keeping unedited copies of these files handy as backups. In my examp
 <span style="color: green;">Correct: Tenant_ID=123</span>
 
 ### Variables
-- PUID - set it so files created in the bind mount will be uid 1000 (change as required)
-- PGID - set it so files created in the bind mount will be gid 1000 (change as required)
-- UMASK - set umask 000 will cause all files to have 777 perms
+- user - Match to the UID & GID of the user you want to run the docker container process as. It's important they have permission to access the files where we have our bind mount located. This will also avoid running the container process itself as root which is good for security. If ensure of your uid:gid of the required user on your docker host run "username=$(whoami) && id $username" while logged in as that user. Final value should look like uid:gid "user=1000:1000" in your docker compose.
+- UMASK - setting umask 022 will cause all files to have 755 perms, remember umask are inverse of permissions and subtract from 777 to get our result. change this as required for your bind mount permissions in most cases 022 will work fine while being reasonably secure.
 - TENANT_ID - This variable is <b>MANDATORY</b> we need it in order to send the logs to the right tenant. Without it the docker will shutdown shortly after starting it as the script will fail.
 - SOPHOS_API - This variable is optional, its part of the sophos integration if you need to use it ensure you are putting the API Access URL + Headers block from the integrations instruction as this variable.
 - OFFICE365_TOKEN - I'm not even sure this variable is used anymore as the azure integration now covers everything in Azure including Office365, I've included it since it is mentioned in the /usr/local/adlumin/adlumin_config.txt file.
@@ -40,9 +39,8 @@ services:
   adlumin-forwarder:
     image: ghcr.io/rumenblack84/adlumin-forwarder-docker:latest
     environment:
-      - PUID=1000 # set it so files created in the bind mount will be uid 1000 (change as required)
-      - PGID=1000 # set it so files created in the bind mount will be gid 1000 (change as required)
-      - UMASK=000 # set umask 000 will cause all files to have 777 perms
+      - user=1000:1000 #Match to the UID & GID of the user you want to run the docker as. It's important they have permission to access the files where we have our bind mount located. This will also avoid running the container process itself as root which is good for security.
+      - UMASK=022 # set umask 022 will cause all files to have 755 perms
       - TENANT_ID=
       - SOPHOS_API=
       - OFFICE365_TOKEN=
